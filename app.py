@@ -7,7 +7,8 @@ import gspread
 st.set_page_config(page_title="EuroQuad Dashboard", layout="centered")
 
 # --- CONFIGURAZIONE GOOGLE SHEETS & CREDENZIALI ---
-SHEET_ID = '148tcAz14DpqYQV0ug5I1LmQuZ3AFrS0ebtl2-WPUIUY'
+# Sheet ID aggiornato per le Scrims / Leaderboard / Dati generali
+SHEET_ID = '1jdqwPKfkHYncXgvfb65UsIwZ2YBFY5j31yaY-mTZBPc'
 GID_PERSONAL_STATS = '327527248'
 
 def ottieni_credenziali():
@@ -54,8 +55,9 @@ st.markdown("""
         color: white;
         border: 1px solid #ffcc00;
         border-radius: 8px;
-        padding: 10px;
+        padding: 8px;
         font-weight: bold;
+        font-size: 13px;
         transition: 0.2s;
     }
     div.stButton > button:hover {
@@ -181,9 +183,9 @@ with col_l2:
 if "page" not in st.session_state:
     st.session_state.page = "Leaderboard"
 
-# 5. Horizontal Navigation Menu
+# 5. Horizontal Navigation Menu (Aggiornato con 7 pulsanti)
 st.write("")
-b1, b2, b3, b4, b5, b6 = st.columns(6)
+b1, b2, b3, b4, b5, b6, b7 = st.columns(7)
 
 with b1:
     if st.button("🏆\nLeader", use_container_width=True):
@@ -198,9 +200,12 @@ with b4:
     if st.button("⚔️\nScrims 2", use_container_width=True):
         st.session_state.page = "Scrims 2"
 with b5:
+    if st.button("👥\nStats", use_container_width=True):
+        st.session_state.page = "Scrims Stats"
+with b6:
     if st.button("👤\nPlayer", use_container_width=True):
         st.session_state.page = "Risultati Giocatore"
-with b6:
+with b7:
     if st.button("🎯\nPersonal", use_container_width=True):
         st.session_state.page = "PERSONAL STATS"
 
@@ -242,7 +247,7 @@ def render_ranking_table(df_sub, headers):
     html += '</tbody></table>'
     return html
 
-# General function to render Scrims tables (Aggiornato con gestione Revive)
+# General function to render Scrims tables
 def render_scrims_tables(gid, scrim_title, team_coords, game_coords_list, summary_coords, overall_coords):
     st.markdown(f"<h1 style='text-align: center;'>⚔️ {scrim_title} Results</h1>", unsafe_allow_html=True)
     st.write("---")
@@ -414,6 +419,16 @@ elif page == "Scrims 2":
     s2_overall = (20, 28, 39, 42)  
     
     render_scrims_tables('547827980', "Scrims 2", s2_teams, s2_games, s2_summary, s2_overall)
+
+elif page == "Scrims Stats":
+    st.markdown("<h1 style='text-align: center;'>👥 Scrims Stats Overview</h1>", unsafe_allow_html=True)
+    st.write("---")
+    try:
+        # Mostra i dati generali dal foglio Scrims Stats (puoi personalizzare il GID o le righe se necessario)
+        df_stats = load_data('547827980')
+        st.dataframe(df_stats.head(30), use_container_width=True)
+    except Exception as e:
+        st.error(f"Errore nel caricamento delle Scrims Stats: {e}")
 
 elif page == "Risultati Giocatore":
     st.markdown("<h1 style='text-align: center;'>👤 Player Results</h1>", unsafe_allow_html=True)
