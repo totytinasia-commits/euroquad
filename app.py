@@ -331,7 +331,7 @@ elif page == "Regole":
             <tr><td>6th (& +)</td><td>0 points</td></tr>
             <tr><td>1 Kill</td><td>1 point</td></tr>
             <tr><td>200 damages</td><td>1 point</td></tr>
-            <tr><td>Revive factor</td><td>* 0,2 points</td></tr>
+            <tr><td>Revive factor</td><td>* 0,5 points</td></tr>
         </tbody>
     </table>
     """
