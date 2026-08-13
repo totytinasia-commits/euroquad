@@ -327,7 +327,7 @@ if page == "Leaderboard":
     if not df.empty:
         st.markdown("<h3 style='text-align: center;'>Lobby 1</h3>", unsafe_allow_html=True)
         try:
-            lobby1 = df.iloc[12:21, [5, 6]].copy()
+            lobby1 = df.iloc[14:20, [4, 5]].copy()
             lobby1.columns = ["Team", "Points"]
             lobby1["Points"] = pd.to_numeric(lobby1["Points"], errors='coerce').fillna(0).astype(int)
             st.markdown(render_ranking_table(lobby1, ["Team", "Points"]), unsafe_allow_html=True)
