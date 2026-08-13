@@ -411,7 +411,7 @@ elif page == "Risultati Giocatore":
     # --- Lobby 1 ---
     st.markdown("<h3 style='text-align: center;'>Lobby 1</h3>", unsafe_allow_html=True)
     try:
-        lobby1_df = df_player.iloc[11:36, cols].copy()
+        lobby1_df = df_player.iloc[11:35, cols].copy()
         lobby1_df.columns = headers_player
         st.markdown(render_custom_table(lobby1_df, headers_player), unsafe_allow_html=True)
     except Exception as e:
@@ -430,7 +430,7 @@ elif page == "Risultati Giocatore":
     st.markdown("<h3 style='text-align: center;'>Lobby 3</h3>", unsafe_allow_html=True)
     try:
         # AGGIORNA GLI INDICI QUI SOTTO (ESEMPIO: 74:100) IN BASE A DOVE SI TROVA LA LOBBY 3 NEL FOGLIO
-        lobby3_df = df_player.iloc[71:95, cols].copy() 
+        lobby3_df = df_player.iloc[71:94, cols].copy() 
         lobby3_df.columns = headers_player
         st.markdown(render_custom_table(lobby3_df, headers_player), unsafe_allow_html=True)
     except Exception as e:
