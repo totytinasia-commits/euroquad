@@ -4,7 +4,7 @@ import time
 import gspread
 
 # 1. Page Configuration
-st.set_page_config(page_title="EuroCup Dashboard", layout="centered")
+st.set_page_config(page_title="EuroQuad Dashboard", layout="centered")
 
 # --- CONFIGURAZIONE GOOGLE SHEETS & CREDENZIALI ---
 SHEET_ID = '148tcAz14DpqYQV0ug5I1LmQuZ3AFrS0ebtl2-WPUIUY'
@@ -38,10 +38,10 @@ def scrivi_cella_per_gid(gid, cell_address, value):
     except Exception as e:
         st.error(f"Errore durante la scrittura su Google Sheets: {e}")
 
-# 2. CSS Styling (Sfondo scuro, dettagli blu/bianchi)
+# 2. CSS Styling (Sfondo blu, dettagli neri)
 st.markdown("""
     <style>
-    .stApp { background-color: #000; }
+    .stApp { background-color: #0b192c; }
     h1, h2, h3, p { color: #fff !important; text-align: center; }
     
     /* Hide sidebar */
@@ -50,18 +50,18 @@ st.markdown("""
     /* Navigation buttons style */
     div.stButton > button {
         width: 100%;
-        background-color: #111;
+        background-color: #000b1a;
         color: white;
-        border: 1px solid #333;
+        border: 1px solid #1e3e62;
         border-radius: 8px;
         padding: 10px;
         font-weight: bold;
         transition: 0.2s;
     }
     div.stButton > button:hover {
-        background-color: #222;
-        border-color: #2ecc71;
-        color: #2ecc71;
+        background-color: #1e3e62;
+        border-color: #ffcc00;
+        color: #ffcc00;
     }
 
     /* Standard Table Style */
@@ -73,22 +73,22 @@ st.markdown("""
         border-spacing: 0;
         border-radius: 8px;
         overflow: hidden;
-        border: 1px solid #333;
+        border: 1px solid #1e3e62;
         font-family: sans-serif;
     }
     .custom-table th {
-        background-color: #222;
+        background-color: #000b1a;
         color: #fff;
         padding: 10px 14px;
         text-align: center;
-        border-bottom: 1px solid #444;
+        border-bottom: 1px solid #1e3e62;
         font-size: 16px;
     }
     .custom-table td {
-        background-color: #111;
+        background-color: #000814;
         color: #ddd;
         padding: 10px 14px;
-        border-bottom: 1px solid #222;
+        border-bottom: 1px solid #0b192c;
         text-align: center;
     }
     .custom-table td:first-child {
@@ -107,22 +107,22 @@ st.markdown("""
         border-spacing: 0;
         border-radius: 8px;
         overflow: hidden;
-        border: 1px solid #333;
+        border: 1px solid #1e3e62;
         font-family: sans-serif;
     }
     .ranking-table th {
-        background-color: #222;
+        background-color: #000b1a;
         color: #fff;
         padding: 10px 14px;
         text-align: center;
-        border-bottom: 1px solid #444;
+        border-bottom: 1px solid #1e3e62;
         font-size: 16px;
     }
     .ranking-table td {
-        background-color: #111;
+        background-color: #000814;
         color: #ddd;
         padding: 10px 14px;
-        border-bottom: 1px solid #222;
+        border-bottom: 1px solid #0b192c;
         text-align: center;
     }
     .ranking-table td:first-child {
@@ -132,21 +132,21 @@ st.markdown("""
         border-bottom: none;
     }
     .ranking-table tbody tr:first-child td {
-        color: #2ecc71 !important;
+        color: #ffcc00 !important;
         font-weight: bold !important;
     }
 
     /* Stat Cards */
     .stat-card {
-        background-color: #111;
-        border: 1px solid #333;
+        background-color: #000814;
+        border: 1px solid #1e3e62;
         border-radius: 8px;
         padding: 12px;
         text-align: center;
         margin-bottom: 10px;
     }
     .stat-label {
-        color: #888;
+        color: #88a0c0;
         font-size: 0.75rem;
         font-weight: bold;
         margin-bottom: 4px;
@@ -174,7 +174,7 @@ with col_l2:
     try:
         st.image("logo.png", use_container_width=True)
     except:
-        st.title("EURO CUP")
+        st.title("EUROQUAD")
     st.markdown('</div>', unsafe_allow_html=True)
 
 # 4. Initialize session state for pages
@@ -362,12 +362,12 @@ elif page == "Regole":
     <table class="custom-table">
         <thead><tr><th colspan="2">INFO</th></tr></thead>
         <tbody>
-            <tr><td>Map</td><td>EURO CUP MAPS</td></tr>
+            <tr><td>Map</td><td>EUROQUAD MAPS</td></tr>
             <tr><td>Ping</td><td>EU</td></tr>
             <tr><td>Pod Pul</td><td>Allowed</td></tr>
             <tr><td>Items +/</td><td>Harmonica + /SPR -</td></tr>
             <tr><td>Games</td><td>6</td></tr>
-            <tr><td colspan="2" style="font-weight: bold; color: #2ecc71;">“The worst game will NOT be counted” ✅</td></tr>
+            <tr><td colspan="2" style="font-weight: bold; color: #ffcc00;">“The worst game will NOT be counted” ✅</td></tr>
         </tbody>
     </table>
     """
@@ -443,7 +443,7 @@ elif page == "Risultati Giocatore":
 # --- SEZIONE: PERSONAL STATS ---
 # ==========================================
 elif page == "PERSONAL STATS":
-    st.markdown("<div style='background-color: #0e1117; border: 2px solid #262730; border-radius: 12px; padding: 20px;'>", unsafe_allow_html=True)
+    st.markdown("<div style='background-color: #000814; border: 2px solid #1e3e62; border-radius: 12px; padding: 20px;'>", unsafe_allow_html=True)
     st.markdown("### 👤 Personal Stats Dashboard")
 
     target_ws = None
@@ -556,7 +556,7 @@ elif page == "PERSONAL STATS":
     except Exception as e:
         st.warning(f"Error reading dashboard data: {e}")
 
-    st.markdown("<h4 style='color: #93c5fd; font-size: 1rem;'>MATCH SUMMARY</h4>", unsafe_allow_html=True)
+    st.markdown("<h4 style='color: #60a5fa; font-size: 1rem;'>MATCH SUMMARY</h4>", unsafe_allow_html=True)
     c_grid1, c_grid2, c_grid3 = st.columns(3)
     
     with c_grid1:
@@ -573,7 +573,7 @@ elif page == "PERSONAL STATS":
 
     st.markdown("<br>", unsafe_allow_html=True)
 
-    st.markdown("<h4 style='color: #93c5fd; font-size: 1rem;'>DEADLIEST WEAPON</h4>", unsafe_allow_html=True)
+    st.markdown("<h4 style='color: #60a5fa; font-size: 1rem;'>DEADLIEST WEAPON</h4>", unsafe_allow_html=True)
     dw_col1, dw_col2, dw_col3 = st.columns(3)
     with dw_col1:
         st.markdown(f"<div class='stat-card'><div class='stat-label'>WEAPON</div><div class='stat-value' style='font-size: 0.85rem;'>{deadliest_w}</div></div>", unsafe_allow_html=True)
@@ -584,7 +584,7 @@ elif page == "PERSONAL STATS":
 
     st.markdown("<br>", unsafe_allow_html=True)
 
-    st.markdown("<h4 style='color: #93c5fd; text-align: center;'>WEAPON PERFORMANCE</h4>", unsafe_allow_html=True)
+    st.markdown("<h4 style='color: #60a5fa; text-align: center;'>WEAPON PERFORMANCE</h4>", unsafe_allow_html=True)
     
     if weapon_rows_data:
         df_weapons_final = pd.DataFrame(weapon_rows_data)
