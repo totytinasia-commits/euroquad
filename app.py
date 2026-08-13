@@ -336,7 +336,7 @@ if page == "Leaderboard":
             
         st.markdown("<h3 style='text-align: center;'>Lobby 2</h3>", unsafe_allow_html=True)
         try:
-            lobby2 = df.iloc[12:21, [9, 10]].copy()
+            lobby2 = df.iloc[12:20, [6, 7]].copy()
             lobby2.columns = ["Team", "Points"]
             lobby2["Points"] = pd.to_numeric(lobby2["Points"], errors='coerce').fillna(0).astype(int)
             st.markdown(render_ranking_table(lobby2, ["Team", "Points"]), unsafe_allow_html=True)
@@ -345,7 +345,7 @@ if page == "Leaderboard":
 
         st.markdown("<h3 style='text-align: center;'>Lobby 3</h3>", unsafe_allow_html=True)
         try:
-            lobby3 = df.iloc[12:21, [13, 14]].copy()
+            lobby3 = df.iloc[12:21, [9, 10]].copy()
             lobby3.columns = ["Team", "Points"]
             lobby3["Points"] = pd.to_numeric(lobby3["Points"], errors='coerce').fillna(0).astype(int)
             st.markdown(render_ranking_table(lobby3, ["Team", "Points"]), unsafe_allow_html=True)
