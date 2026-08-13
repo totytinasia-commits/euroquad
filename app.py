@@ -459,7 +459,7 @@ elif page == "PERSONAL STATS":
                 if d13_raw is not None and str(d13_raw).strip() != "":
                     current_d13_val = str(d13_raw).strip()
                 
-                col_c_values = target_ws.get("C12:C60")
+                col_c_values = target_ws.get("C12:C92")
                 for row in col_c_values:
                     if row and len(row) > 0:
                         p = str(row[0]).strip()
