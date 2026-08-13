@@ -246,7 +246,7 @@ def render_ranking_table(df_sub, headers):
     html += '</tbody></table>'
     return html
 
-# General function to render Scrims tables (Senza Summary e Overall Stats)
+# General function to render Scrims tables
 def render_scrims_tables(gid, scrim_title, team_coords, game_coords_list):
     st.markdown(f"<h1 style='text-align: center;'>⚔️ {scrim_title} Results</h1>", unsafe_allow_html=True)
     st.write("---")
@@ -266,13 +266,13 @@ def render_scrims_tables(gid, scrim_title, team_coords, game_coords_list):
         st.markdown(f"<h3 style='text-align: center;'>Game {idx}</h3>", unsafe_allow_html=True)
         try:
             val_df = df.iloc[r_start:r_start+num_rows, c_start:c_end].copy().fillna("")
-            val_df.columns = ["Position", "Kills", "DMG", "Revive"]
+            val_df.columns = ["Position", "Kills", "DMG", "Revive", "Assist"]
             
             combined_df = pd.DataFrame({"Team": teams})
             for i, col in enumerate(val_df.columns):
                 combined_df[col] = val_df.iloc[:, i].values
 
-            st.markdown(render_custom_table(combined_df, ["Team", "Position", "Kills", "DMG", "Revive"]), unsafe_allow_html=True)
+            st.markdown(render_custom_table(combined_df, ["Team", "Position", "Kills", "DMG", "Revive", "Assist"]), unsafe_allow_html=True)
         except Exception as e:
             st.error(f"Error loading Game {idx} data: {e}")
 
@@ -367,36 +367,36 @@ elif page == "Regole":
 elif page == "Scrims Lobby 1":
     s1_teams = (8, 16, 4) 
     s1_games = [
-        (8, 16, 5, 9),    
-        (8, 16, 10, 14),    
-        (8, 16, 15, 19),    
-        (8, 16, 20, 24),    
-        (8, 16, 25, 29),    
-        (8, 16, 30, 34)     
+        (8, 16, 5, 10),    
+        (8, 16, 11, 16),    
+        (8, 16, 17, 22),    
+        (8, 16, 23, 28),    
+        (8, 16, 29, 34),    
+        (8, 16, 35, 40)     
     ]
     render_scrims_tables('547827980', "Scrims Lobby 1", s1_teams, s1_games)
 
 elif page == "Scrims Lobby 2":
     s2_teams = (20, 28, 4) 
     s2_games = [
-        (20, 28, 5, 9),    
-        (20, 28, 10, 14),    
-        (20, 28, 15, 19),    
-        (20, 28, 20, 24),    
-        (20, 28, 25, 29),    
-        (20, 28, 30, 34)     
+        (20, 28, 5, 10),    
+        (20, 28, 11, 16),    
+        (20, 28, 17, 22),    
+        (20, 28, 23, 28),    
+        (20, 28, 29, 34),    
+        (20, 28, 35, 40)     
     ]
     render_scrims_tables('547827980', "Scrims Lobby 2", s2_teams, s2_games)
 
 elif page == "Scrims Lobby 3":
     s3_teams = (31, 40, 4) 
     s3_games = [
-        (31, 40, 5, 9),    
-        (31, 40, 10, 14),    
-        (31, 40, 15, 19),    
-        (31, 40, 20, 24),    
-        (31, 40, 25, 29),    
-        (31, 40, 30, 34)     
+        (31, 40, 5, 10),    
+        (31, 40, 11, 16),    
+        (31, 40, 17, 22),    
+        (31, 40, 23, 28),    
+        (31, 40, 29, 34),    
+        (31, 40, 35, 40)     
     ]
     render_scrims_tables('547827980', "Scrims Lobby 3", s3_teams, s3_games)
 
@@ -429,7 +429,6 @@ elif page == "Risultati Giocatore":
     # --- Lobby 3 ---
     st.markdown("<h3 style='text-align: center;'>Lobby 3</h3>", unsafe_allow_html=True)
     try:
-        # AGGIORNA GLI INDICI QUI SOTTO (ESEMPIO: 74:100) IN BASE A DOVE SI TROVA LA LOBBY 3 NEL FOGLIO
         lobby3_df = df_player.iloc[71:94, cols].copy() 
         lobby3_df.columns = headers_player
         st.markdown(render_custom_table(lobby3_df, headers_player), unsafe_allow_html=True)
