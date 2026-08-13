@@ -389,14 +389,14 @@ elif page == "Scrims Lobby 2":
     render_scrims_tables('547827980', "Scrims Lobby 2", s2_teams, s2_games)
 
 elif page == "Scrims Lobby 3":
-    s3_teams = (32, 40, 4) 
+    s3_teams = (31, 40, 4) 
     s3_games = [
-        (32, 40, 5, 9),    
-        (32, 40, 10, 14),    
-        (32, 40, 15, 19),    
-        (32, 40, 20, 24),    
-        (32, 40, 25, 29),    
-        (32, 40, 30, 34)     
+        (31, 40, 5, 9),    
+        (31, 40, 10, 14),    
+        (31, 40, 15, 19),    
+        (31, 40, 20, 24),    
+        (31, 40, 25, 29),    
+        (31, 40, 30, 34)     
     ]
     render_scrims_tables('547827980', "Scrims Lobby 3", s3_teams, s3_games)
 
