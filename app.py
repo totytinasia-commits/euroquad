@@ -246,8 +246,8 @@ def render_ranking_table(df_sub, headers):
     html += '</tbody></table>'
     return html
 
-# General function to render Scrims tables
-def render_scrims_tables(gid, scrim_title, team_coords, game_coords_list, summary_coords, overall_coords):
+# General function to render Scrims tables (Senza Summary e Overall Stats)
+def render_scrims_tables(gid, scrim_title, team_coords, game_coords_list):
     st.markdown(f"<h1 style='text-align: center;'>⚔️ {scrim_title} Results</h1>", unsafe_allow_html=True)
     st.write("---")
     
@@ -275,42 +275,6 @@ def render_scrims_tables(gid, scrim_title, team_coords, game_coords_list, summar
             st.markdown(render_custom_table(combined_df, ["Team", "Position", "Kills", "DMG", "Revive"]), unsafe_allow_html=True)
         except Exception as e:
             st.error(f"Error loading Game {idx} data: {e}")
-
-    st.markdown("<h3 style='text-align: center;'>Summary & Adjustments</h3>", unsafe_allow_html=True)
-    try:
-        t7_r_start, _, t7_c_start, t7_c_end = summary_coords
-        val_df = df.iloc[t7_r_start:t7_r_start+num_rows, t7_c_start:t7_c_end].copy().fillna("")
-        
-        combined_df = pd.DataFrame({"Team": teams})
-        cols_t7 = ["Total Points", "Worst match dropped", "Remove Revive Penalty", "Adjusted Score"]
-        for i, col in enumerate(cols_t7):
-            if i < val_df.shape[1]:
-                col_data = val_df.iloc[:, i].values
-                if len(col_data) < num_rows:
-                    col_data = list(col_data) + [""] * (num_rows - len(col_data))
-                combined_df[col] = col_data[:num_rows]
-            
-        st.markdown(render_custom_table(combined_df, ["Team", "Total Points", "Worst Dropped", "No Revive Pen", "Adjusted"]), unsafe_allow_html=True)
-    except Exception as e:
-        st.error(f"Error loading Table 7 data: {e}")
-
-    st.markdown("<h3 style='text-align: center;'>Overall Stats</h3>", unsafe_allow_html=True)
-    try:
-        t8_r_start, _, t8_c_start, t8_c_end = overall_coords
-        val_df = df.iloc[t8_r_start:t8_r_start+num_rows, t8_c_start:t8_c_end].copy().fillna("")
-        
-        combined_df = pd.DataFrame({"Team": teams})
-        cols_t8 = ["Revive", "Kills", "DMG"]
-        for i, col in enumerate(cols_t8):
-            if i < val_df.shape[1]:
-                col_data = val_df.iloc[:, i].values
-                if len(col_data) < num_rows:
-                    col_data = list(col_data) + [""] * (num_rows - len(col_data))
-                combined_df[col] = col_data[:num_rows]
-            
-        st.markdown(render_custom_table(combined_df, ["Team", "Revive", "Kills", "DMG"]), unsafe_allow_html=True)
-    except Exception as e:
-        st.error(f"Error loading Table 8 data: {e}")
 
 # 7. Page Logic
 page = st.session_state.page
@@ -411,10 +375,7 @@ elif page == "Scrims Lobby 1":
         (8, 16, 25, 29),    
         (8, 16, 30, 34)     
     ]
-    s1_summary = (8, 16, 35, 40)  
-    s1_overall = (8, 16, 39, 42)  
-    
-    render_scrims_tables('547827980', "Scrims Lobby 1", s1_teams, s1_games, s1_summary, s1_overall)
+    render_scrims_tables('547827980', "Scrims Lobby 1", s1_teams, s1_games)
 
 elif page == "Scrims Lobby 2":
     s2_teams = (20, 28, 4) 
@@ -426,10 +387,7 @@ elif page == "Scrims Lobby 2":
         (20, 28, 25, 29),    
         (20, 28, 30, 34)     
     ]
-    s2_summary = (20, 28, 35, 40)  
-    s2_overall = (20, 28, 39, 42)  
-    
-    render_scrims_tables('547827980', "Scrims Lobby 2", s2_teams, s2_games, s2_summary, s2_overall)
+    render_scrims_tables('547827980', "Scrims Lobby 2", s2_teams, s2_games)
 
 elif page == "Scrims Lobby 3":
     s3_teams = (32, 40, 4) 
@@ -441,10 +399,7 @@ elif page == "Scrims Lobby 3":
         (32, 40, 25, 29),    
         (32, 40, 30, 34)     
     ]
-    s3_summary = (32, 40, 35, 40)  
-    s3_overall = (32, 40, 39, 42)  
-    
-    render_scrims_tables('547827980', "Scrims Lobby 3", s3_teams, s3_games, s3_summary, s3_overall)
+    render_scrims_tables('547827980', "Scrims Lobby 3", s3_teams, s3_games)
 
 elif page == "Risultati Giocatore":
     st.markdown("<h1 style='text-align: center;'>👤 Player Results</h1>", unsafe_allow_html=True)
