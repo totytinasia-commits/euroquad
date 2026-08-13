@@ -182,7 +182,7 @@ with col_l2:
 if "page" not in st.session_state:
     st.session_state.page = "Leaderboard"
 
-# 5. Horizontal Navigation Menu (Aggiornato con 8 pulsanti)
+# 5. Horizontal Navigation Menu (8 pulsanti)
 st.write("")
 b1, b2, b3, b4, b5, b6, b7, b8 = st.columns(8)
 
@@ -316,7 +316,6 @@ def render_scrims_tables(gid, scrim_title, team_coords, game_coords_list, summar
         st.error(f"Error loading Table 8 data: {e}")
 
 # 7. Page Logic
-# 7. Page Logic
 page = st.session_state.page
 
 if page == "Leaderboard":
@@ -354,8 +353,6 @@ if page == "Leaderboard":
             st.error(f"Error Lobby 3 Data: {e}")
     else:
         st.warning("Nessun dato trovato nella Leaderboard.")
-
-elif page == "Regole":
 
 elif page == "Regole":
     st.markdown("<h1 style='text-align: center;'>📜 Rules & Info</h1>", unsafe_allow_html=True)
@@ -438,7 +435,6 @@ elif page == "Scrims Lobby 2":
     render_scrims_tables('547827980', "Scrims Lobby 2", s2_teams, s2_games, s2_summary, s2_overall)
 
 elif page == "Scrims Lobby 3":
-    # Modifica coordinate o GID se necessario per la Lobby 3
     s3_teams = (32, 40, 4) 
     s3_games = [
         (32, 40, 5, 9),    
