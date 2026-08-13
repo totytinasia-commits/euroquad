@@ -205,7 +205,7 @@ with b6:
     if st.button("👤\nPlayer", use_container_width=True):
         st.session_state.page = "Risultati Giocatore"
 with b7:
-    if st.button("🎯\nPersonal", use_container_width=True):
+    if st.button("Personal", use_container_width=True):
         st.session_state.page = "PERSONAL STATS"
 
 st.write("---")
