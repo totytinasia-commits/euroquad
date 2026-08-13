@@ -316,6 +316,7 @@ def render_scrims_tables(gid, scrim_title, team_coords, game_coords_list, summar
         st.error(f"Error loading Table 8 data: {e}")
 
 # 7. Page Logic
+# 7. Page Logic
 page = st.session_state.page
 
 if page == "Leaderboard":
@@ -324,23 +325,37 @@ if page == "Leaderboard":
     
     df = load_data('316677537')
     
-    st.markdown("<h3 style='text-align: center;'>Lobby 1</h3>", unsafe_allow_html=True)
-    try:
-        lobby1 = df.iloc[12:21, [5, 6]].copy()
-        lobby1.columns = ["Team", "Points"]
-        lobby1["Points"] = pd.to_numeric(lobby1["Points"], errors='coerce').fillna(0).astype(int)
-        st.markdown(render_ranking_table(lobby1, ["Team", "Points"]), unsafe_allow_html=True)
-    except Exception as e:
-        st.error(f"Error Lobby 1 Data: {e}")
-        
-    st.markdown("<h3 style='text-align: center;'>Lobby 2</h3>", unsafe_allow_html=True)
-    try:
-        lobby2 = df.iloc[12:21, [9, 10]].copy()
-        lobby2.columns = ["Team", "Points"]
-        lobby2["Points"] = pd.to_numeric(lobby2["Points"], errors='coerce').fillna(0).astype(int)
-        st.markdown(render_ranking_table(lobby2, ["Team", "Points"]), unsafe_allow_html=True)
-    except Exception as e:
-        st.error(f"Error Lobby 2 Data: {e}")
+    if not df.empty:
+        st.markdown("<h3 style='text-align: center;'>Lobby 1</h3>", unsafe_allow_html=True)
+        try:
+            lobby1 = df.iloc[12:21, [5, 6]].copy()
+            lobby1.columns = ["Team", "Points"]
+            lobby1["Points"] = pd.to_numeric(lobby1["Points"], errors='coerce').fillna(0).astype(int)
+            st.markdown(render_ranking_table(lobby1, ["Team", "Points"]), unsafe_allow_html=True)
+        except Exception as e:
+            st.error(f"Error Lobby 1 Data: {e}")
+            
+        st.markdown("<h3 style='text-align: center;'>Lobby 2</h3>", unsafe_allow_html=True)
+        try:
+            lobby2 = df.iloc[12:21, [9, 10]].copy()
+            lobby2.columns = ["Team", "Points"]
+            lobby2["Points"] = pd.to_numeric(lobby2["Points"], errors='coerce').fillna(0).astype(int)
+            st.markdown(render_ranking_table(lobby2, ["Team", "Points"]), unsafe_allow_html=True)
+        except Exception as e:
+            st.error(f"Error Lobby 2 Data: {e}")
+
+        st.markdown("<h3 style='text-align: center;'>Lobby 3</h3>", unsafe_allow_html=True)
+        try:
+            lobby3 = df.iloc[12:21, [13, 14]].copy()
+            lobby3.columns = ["Team", "Points"]
+            lobby3["Points"] = pd.to_numeric(lobby3["Points"], errors='coerce').fillna(0).astype(int)
+            st.markdown(render_ranking_table(lobby3, ["Team", "Points"]), unsafe_allow_html=True)
+        except Exception as e:
+            st.error(f"Error Lobby 3 Data: {e}")
+    else:
+        st.warning("Nessun dato trovato nella Leaderboard.")
+
+elif page == "Regole":
 
 elif page == "Regole":
     st.markdown("<h1 style='text-align: center;'>📜 Rules & Info</h1>", unsafe_allow_html=True)
