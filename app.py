@@ -182,9 +182,9 @@ with col_l2:
 if "page" not in st.session_state:
     st.session_state.page = "Leaderboard"
 
-# 5. Horizontal Navigation Menu (8 pulsanti)
+# 5. Horizontal Navigation Menu (7 pulsanti)
 st.write("")
-b1, b2, b3, b4, b5, b6, b7, b8 = st.columns(8)
+b1, b2, b3, b4, b5, b6, b7 = st.columns(7)
 
 with b1:
     if st.button("🏆\nLeader", use_container_width=True):
@@ -202,12 +202,9 @@ with b5:
     if st.button("⚔️\nLobby 3", use_container_width=True):
         st.session_state.page = "Scrims Lobby 3"
 with b6:
-    if st.button("👥\nStats", use_container_width=True):
-        st.session_state.page = "Scrims Stats"
-with b7:
     if st.button("👤\nPlayer", use_container_width=True):
         st.session_state.page = "Risultati Giocatore"
-with b8:
+with b7:
     if st.button("🎯\nPersonal", use_container_width=True):
         st.session_state.page = "PERSONAL STATS"
 
@@ -448,15 +445,6 @@ elif page == "Scrims Lobby 3":
     s3_overall = (32, 40, 39, 42)  
     
     render_scrims_tables('547827980', "Scrims Lobby 3", s3_teams, s3_games, s3_summary, s3_overall)
-
-elif page == "Scrims Stats":
-    st.markdown("<h1 style='text-align: center;'>👥 Scrims Stats Overview</h1>", unsafe_allow_html=True)
-    st.write("---")
-    try:
-        df_stats = load_data('547827980')
-        st.dataframe(df_stats.head(30), use_container_width=True)
-    except Exception as e:
-        st.error(f"Errore nel caricamento delle Scrims Stats: {e}")
 
 elif page == "Risultati Giocatore":
     st.markdown("<h1 style='text-align: center;'>👤 Player Results</h1>", unsafe_allow_html=True)
