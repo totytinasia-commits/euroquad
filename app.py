@@ -411,7 +411,7 @@ elif page == "Risultati Giocatore":
     # --- Lobby 1 ---
     st.markdown("<h3 style='text-align: center;'>Lobby 1</h3>", unsafe_allow_html=True)
     try:
-        lobby1_df = df_player.iloc[11:39, cols].copy()
+        lobby1_df = df_player.iloc[11:36, cols].copy()
         lobby1_df.columns = headers_player
         st.markdown(render_custom_table(lobby1_df, headers_player), unsafe_allow_html=True)
     except Exception as e:
