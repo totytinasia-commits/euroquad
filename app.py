@@ -7,7 +7,6 @@ import gspread
 st.set_page_config(page_title="EuroQuad Dashboard", layout="centered")
 
 # --- CONFIGURAZIONE GOOGLE SHEETS & CREDENZIALI ---
-# Sheet ID aggiornato per le Scrims / Leaderboard / Dati generali
 SHEET_ID = '1jdqwPKfkHYncXgvfb65UsIwZ2YBFY5j31yaY-mTZBPc'
 GID_PERSONAL_STATS = '327527248'
 
@@ -57,7 +56,7 @@ st.markdown("""
         border-radius: 8px;
         padding: 8px;
         font-weight: bold;
-        font-size: 13px;
+        font-size: 12px;
         transition: 0.2s;
     }
     div.stButton > button:hover {
@@ -183,9 +182,9 @@ with col_l2:
 if "page" not in st.session_state:
     st.session_state.page = "Leaderboard"
 
-# 5. Horizontal Navigation Menu (Aggiornato con 7 pulsanti)
+# 5. Horizontal Navigation Menu (Aggiornato con 8 pulsanti)
 st.write("")
-b1, b2, b3, b4, b5, b6, b7 = st.columns(7)
+b1, b2, b3, b4, b5, b6, b7, b8 = st.columns(8)
 
 with b1:
     if st.button("🏆\nLeader", use_container_width=True):
@@ -194,18 +193,21 @@ with b2:
     if st.button("📜\nRules", use_container_width=True):
         st.session_state.page = "Regole"
 with b3:
-    if st.button("⚔️\nScrims 1", use_container_width=True):
-        st.session_state.page = "Scrims 1"
+    if st.button("⚔️\nLobby 1", use_container_width=True):
+        st.session_state.page = "Scrims Lobby 1"
 with b4:
-    if st.button("⚔️\nScrims 2", use_container_width=True):
-        st.session_state.page = "Scrims 2"
+    if st.button("⚔️\nLobby 2", use_container_width=True):
+        st.session_state.page = "Scrims Lobby 2"
 with b5:
+    if st.button("⚔️\nLobby 3", use_container_width=True):
+        st.session_state.page = "Scrims Lobby 3"
+with b6:
     if st.button("👥\nStats", use_container_width=True):
         st.session_state.page = "Scrims Stats"
-with b6:
+with b7:
     if st.button("👤\nPlayer", use_container_width=True):
         st.session_state.page = "Risultati Giocatore"
-with b7:
+with b8:
     if st.button("🎯\nPersonal", use_container_width=True):
         st.session_state.page = "PERSONAL STATS"
 
@@ -390,7 +392,7 @@ elif page == "Regole":
     """
     st.markdown(zone_html, unsafe_allow_html=True)
 
-elif page == "Scrims 1":
+elif page == "Scrims Lobby 1":
     s1_teams = (8, 16, 4) 
     s1_games = [
         (8, 16, 5, 9),    
@@ -403,9 +405,9 @@ elif page == "Scrims 1":
     s1_summary = (8, 16, 35, 40)  
     s1_overall = (8, 16, 39, 42)  
     
-    render_scrims_tables('547827980', "Scrims 1", s1_teams, s1_games, s1_summary, s1_overall)
+    render_scrims_tables('547827980', "Scrims Lobby 1", s1_teams, s1_games, s1_summary, s1_overall)
 
-elif page == "Scrims 2":
+elif page == "Scrims Lobby 2":
     s2_teams = (20, 28, 4) 
     s2_games = [
         (20, 28, 5, 9),    
@@ -418,13 +420,28 @@ elif page == "Scrims 2":
     s2_summary = (20, 28, 35, 40)  
     s2_overall = (20, 28, 39, 42)  
     
-    render_scrims_tables('547827980', "Scrims 2", s2_teams, s2_games, s2_summary, s2_overall)
+    render_scrims_tables('547827980', "Scrims Lobby 2", s2_teams, s2_games, s2_summary, s2_overall)
+
+elif page == "Scrims Lobby 3":
+    # Modifica coordinate o GID se necessario per la Lobby 3
+    s3_teams = (32, 40, 4) 
+    s3_games = [
+        (32, 40, 5, 9),    
+        (32, 40, 10, 14),    
+        (32, 40, 15, 19),    
+        (32, 40, 20, 24),    
+        (32, 40, 25, 29),    
+        (32, 40, 30, 34)     
+    ]
+    s3_summary = (32, 40, 35, 40)  
+    s3_overall = (32, 40, 39, 42)  
+    
+    render_scrims_tables('547827980', "Scrims Lobby 3", s3_teams, s3_games, s3_summary, s3_overall)
 
 elif page == "Scrims Stats":
     st.markdown("<h1 style='text-align: center;'>👥 Scrims Stats Overview</h1>", unsafe_allow_html=True)
     st.write("---")
     try:
-        # Mostra i dati generali dal foglio Scrims Stats (puoi personalizzare il GID o le righe se necessario)
         df_stats = load_data('547827980')
         st.dataframe(df_stats.head(30), use_container_width=True)
     except Exception as e:
