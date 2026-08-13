@@ -8,7 +8,7 @@ st.set_page_config(page_title="EuroQuad Dashboard", layout="centered")
 
 # --- CONFIGURAZIONE GOOGLE SHEETS & CREDENZIALI ---
 SHEET_ID = '148tcAz14DpqYQV0ug5I1LmQuZ3AFrS0ebtl2-WPUIUY'
-GID_PERSONAL_STATS = '327527248' # Sostituisci con il GID corretto della scheda Personal Stats se diverso
+GID_PERSONAL_STATS = '327527248'
 
 def ottieni_credenziali():
     """Recupera le credenziali da st.secrets per gspread"""
@@ -38,10 +38,10 @@ def scrivi_cella_per_gid(gid, cell_address, value):
     except Exception as e:
         st.error(f"Errore durante la scrittura su Google Sheets: {e}")
 
-# 2. CSS Styling (Sfondo blu, dettagli neri)
+# 2. CSS Styling (Sfondo blu ufficiale bandiera UE #003399 e dettagli neri/oro)
 st.markdown("""
     <style>
-    .stApp { background-color: #0b192c; }
+    .stApp { background-color: #003399; }
     h1, h2, h3, p { color: #fff !important; text-align: center; }
     
     /* Hide sidebar */
@@ -50,17 +50,17 @@ st.markdown("""
     /* Navigation buttons style */
     div.stButton > button {
         width: 100%;
-        background-color: #000b1a;
+        background-color: #000000;
         color: white;
-        border: 1px solid #1e3e62;
+        border: 1px solid #ffcc00;
         border-radius: 8px;
         padding: 10px;
         font-weight: bold;
         transition: 0.2s;
     }
     div.stButton > button:hover {
-        background-color: #1e3e62;
-        border-color: #ffcc00;
+        background-color: #111111;
+        border-color: #ffffff;
         color: #ffcc00;
     }
 
@@ -73,22 +73,22 @@ st.markdown("""
         border-spacing: 0;
         border-radius: 8px;
         overflow: hidden;
-        border: 1px solid #1e3e62;
+        border: 1px solid #ffcc00;
         font-family: sans-serif;
     }
     .custom-table th {
-        background-color: #000b1a;
-        color: #fff;
+        background-color: #000000;
+        color: #ffcc00;
         padding: 10px 14px;
         text-align: center;
-        border-bottom: 1px solid #1e3e62;
+        border-bottom: 1px solid #ffcc00;
         font-size: 16px;
     }
     .custom-table td {
-        background-color: #000814;
+        background-color: #000b1a;
         color: #ddd;
         padding: 10px 14px;
-        border-bottom: 1px solid #0b192c;
+        border-bottom: 1px solid #001a33;
         text-align: center;
     }
     .custom-table td:first-child {
@@ -107,22 +107,22 @@ st.markdown("""
         border-spacing: 0;
         border-radius: 8px;
         overflow: hidden;
-        border: 1px solid #1e3e62;
+        border: 1px solid #ffcc00;
         font-family: sans-serif;
     }
     .ranking-table th {
-        background-color: #000b1a;
-        color: #fff;
+        background-color: #000000;
+        color: #ffcc00;
         padding: 10px 14px;
         text-align: center;
-        border-bottom: 1px solid #1e3e62;
+        border-bottom: 1px solid #ffcc00;
         font-size: 16px;
     }
     .ranking-table td {
-        background-color: #000814;
+        background-color: #000b1a;
         color: #ddd;
         padding: 10px 14px;
-        border-bottom: 1px solid #0b192c;
+        border-bottom: 1px solid #001a33;
         text-align: center;
     }
     .ranking-table td:first-child {
@@ -138,15 +138,15 @@ st.markdown("""
 
     /* Stat Cards */
     .stat-card {
-        background-color: #000814;
-        border: 1px solid #1e3e62;
+        background-color: #000000;
+        border: 1px solid #ffcc00;
         border-radius: 8px;
         padding: 12px;
         text-align: center;
         margin-bottom: 10px;
     }
     .stat-label {
-        color: #88a0c0;
+        color: #ffcc00;
         font-size: 0.75rem;
         font-weight: bold;
         margin-bottom: 4px;
@@ -443,8 +443,8 @@ elif page == "Risultati Giocatore":
 # --- SEZIONE: PERSONAL STATS ---
 # ==========================================
 elif page == "PERSONAL STATS":
-    st.markdown("<div style='background-color: #000814; border: 2px solid #1e3e62; border-radius: 12px; padding: 20px;'>", unsafe_allow_html=True)
-    st.markdown("### 👤 Personal Stats Dashboard")
+    st.markdown("<div style='background-color: #000000; border: 2px solid #ffcc00; border-radius: 12px; padding: 20px;'>", unsafe_allow_html=True)
+    st.markdown("<h3 style='color: #ffcc00;'>👤 Personal Stats Dashboard</h3>", unsafe_allow_html=True)
 
     target_ws = None
     current_d13_val = ""
@@ -556,7 +556,7 @@ elif page == "PERSONAL STATS":
     except Exception as e:
         st.warning(f"Error reading dashboard data: {e}")
 
-    st.markdown("<h4 style='color: #60a5fa; font-size: 1rem;'>MATCH SUMMARY</h4>", unsafe_allow_html=True)
+    st.markdown("<h4 style='color: #ffcc00; font-size: 1rem;'>MATCH SUMMARY</h4>", unsafe_allow_html=True)
     c_grid1, c_grid2, c_grid3 = st.columns(3)
     
     with c_grid1:
@@ -573,7 +573,7 @@ elif page == "PERSONAL STATS":
 
     st.markdown("<br>", unsafe_allow_html=True)
 
-    st.markdown("<h4 style='color: #60a5fa; font-size: 1rem;'>DEADLIEST WEAPON</h4>", unsafe_allow_html=True)
+    st.markdown("<h4 style='color: #ffcc00; font-size: 1rem;'>DEADLIEST WEAPON</h4>", unsafe_allow_html=True)
     dw_col1, dw_col2, dw_col3 = st.columns(3)
     with dw_col1:
         st.markdown(f"<div class='stat-card'><div class='stat-label'>WEAPON</div><div class='stat-value' style='font-size: 0.85rem;'>{deadliest_w}</div></div>", unsafe_allow_html=True)
@@ -584,7 +584,7 @@ elif page == "PERSONAL STATS":
 
     st.markdown("<br>", unsafe_allow_html=True)
 
-    st.markdown("<h4 style='color: #60a5fa; text-align: center;'>WEAPON PERFORMANCE</h4>", unsafe_allow_html=True)
+    st.markdown("<h4 style='color: #ffcc00; text-align: center;'>WEAPON PERFORMANCE</h4>", unsafe_allow_html=True)
     
     if weapon_rows_data:
         df_weapons_final = pd.DataFrame(weapon_rows_data)
