@@ -290,7 +290,7 @@ if page == "Leaderboard":
         try:
             lobby1 = df.iloc[12:20, [3, 4]].copy()
             lobby1.columns = ["Team", "Points"]
-            lobby1["Points"] = pd.to_numeric(lobby1["Points"], errors='coerce').fillna(0).astype(int)
+            lobby1["Points"] = pd.to_numeric(lobby1["Points"].astype(str).str.replace(',', '.'), errors='coerce').fillna(0)
             st.markdown(render_ranking_table(lobby1, ["Team", "Points"]), unsafe_allow_html=True)
         except Exception as e:
             st.error(f"Error Lobby 1 Data: {e}")
@@ -299,7 +299,7 @@ if page == "Leaderboard":
         try:
             lobby2 = df.iloc[12:20, [6, 7]].copy()
             lobby2.columns = ["Team", "Points"]
-            lobby2["Points"] = pd.to_numeric(lobby2["Points"], errors='coerce').fillna(0).astype(int)
+            lobby2["Points"] = pd.to_numeric(lobby2["Points"].astype(str).str.replace(',', '.'), errors='coerce').fillna(0)
             st.markdown(render_ranking_table(lobby2, ["Team", "Points"]), unsafe_allow_html=True)
         except Exception as e:
             st.error(f"Error Lobby 2 Data: {e}")
@@ -308,13 +308,12 @@ if page == "Leaderboard":
         try:
             lobby3 = df.iloc[12:21, [9, 10]].copy()
             lobby3.columns = ["Team", "Points"]
-            lobby3["Points"] = pd.to_numeric(lobby3["Points"], errors='coerce').fillna(0).astype(int)
+            lobby3["Points"] = pd.to_numeric(lobby3["Points"].astype(str).str.replace(',', '.'), errors='coerce').fillna(0)
             st.markdown(render_ranking_table(lobby3, ["Team", "Points"]), unsafe_allow_html=True)
         except Exception as e:
             st.error(f"Error Lobby 3 Data: {e}")
     else:
         st.warning("Nessun dato trovato nella Leaderboard.")
-
 elif page == "Regole":
     st.markdown("<h1 style='text-align: center;'>📜 Rules & Info</h1>", unsafe_allow_html=True)
     st.write("---")
