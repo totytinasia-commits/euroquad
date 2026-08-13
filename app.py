@@ -408,6 +408,7 @@ elif page == "Risultati Giocatore":
     headers_player = ["Player", "Kill", "DMG", "MVP", "DHAT", "ACC%"]
     cols = [2, 3, 6, 9, 12, 15]
     
+    # --- Lobby 1 ---
     st.markdown("<h3 style='text-align: center;'>Lobby 1</h3>", unsafe_allow_html=True)
     try:
         lobby1_df = df_player.iloc[11:35, cols].copy()
@@ -416,6 +417,7 @@ elif page == "Risultati Giocatore":
     except Exception as e:
         st.error(f"Error loading Lobby 1 Player Data: {e}")
         
+    # --- Lobby 2 ---
     st.markdown("<h3 style='text-align: center;'>Lobby 2</h3>", unsafe_allow_html=True)
     try:
         lobby2_df = df_player.iloc[41:65, cols].copy()
@@ -423,6 +425,16 @@ elif page == "Risultati Giocatore":
         st.markdown(render_custom_table(lobby2_df, headers_player), unsafe_allow_html=True)
     except Exception as e:
         st.error(f"Error loading Lobby 2 Player Data: {e}")
+
+    # --- Lobby 3 ---
+    st.markdown("<h3 style='text-align: center;'>Lobby 3</h3>", unsafe_allow_html=True)
+    try:
+        # AGGIORNA GLI INDICI QUI SOTTO (ESEMPIO: 71:95) IN BASE A DOVE SI TROVA LA LOBBY 3 NEL FOGLIO
+        lobby3_df = df_player.iloc[71:95, cols].copy() 
+        lobby3_df.columns = headers_player
+        st.markdown(render_custom_table(lobby3_df, headers_player), unsafe_allow_html=True)
+    except Exception as e:
+        st.error(f"Error loading Lobby 3 Player Data: {e}")
     
 # ==========================================
 # --- SEZIONE: PERSONAL STATS ---
