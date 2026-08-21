@@ -371,8 +371,7 @@ elif page == "Scrims Lobby 1":
         (8, 16, 11, 16),    
         (8, 16, 17, 22),    
         (8, 16, 23, 28),    
-        (8, 16, 29, 34),    
-        (8, 16, 35, 40)     
+        (8, 16, 29, 34)     # Game 5 (Game 6 rimosso)
     ]
     render_scrims_tables('547827980', "Scrims Lobby 1", s1_teams, s1_games)
 
@@ -383,8 +382,7 @@ elif page == "Scrims Lobby 2":
         (20, 28, 11, 16),    
         (20, 28, 17, 22),    
         (20, 28, 23, 28),    
-        (20, 28, 29, 34),    
-        (20, 28, 35, 40)     
+        (20, 28, 29, 34)     # Game 5 (Game 6 rimosso)
     ]
     render_scrims_tables('547827980', "Scrims Lobby 2", s2_teams, s2_games)
 
@@ -395,8 +393,7 @@ elif page == "Scrims Lobby 3":
         (31, 40, 11, 16),    
         (31, 40, 17, 22),    
         (31, 40, 23, 28),    
-        (31, 40, 29, 34),    
-        (31, 40, 35, 40)     
+        (31, 40, 29, 34)     # Game 5 (Game 6 rimosso)
     ]
     render_scrims_tables('547827980', "Scrims Lobby 3", s3_teams, s3_games)
 
