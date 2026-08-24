@@ -531,7 +531,7 @@ elif page == "PERSONAL STATS":
                     deadliest_d = format_val(h20_l21[1][3] if len(h20_l21[1]) > 3 else 0)
                     deadliest_a = format_val(h20_l21[1][4] if len(h20_l21[1]) > 4 else 0, is_percentage=True)
 
-            weapons_raw = target_ws.get("F27:L67")
+            weapons_raw = target_ws.get("F27:L68")
             if weapons_raw:
                 for r_data in weapons_raw:
                     if r_data and len(r_data) > 0:
