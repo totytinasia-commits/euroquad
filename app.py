@@ -508,9 +508,10 @@ elif page == "PERSONAL STATS":
     # Inizializzazione variabili Match Summary (14 campi totali)
     summary_fired, summary_hit, summary_acc, summary_kill, summary_dmg, summary_mvp, summary_death = "0", "0", "0.00%", "0", "0", "0", "0"
     summary_revive, summary_oh_shots, summary_oh_hit, summary_oh_acc = "0", "0", "0", "0.00%"
-    summary_th_shots, summary_th_hit, summary_th_acc = "0", "0", "0.00%"
+    summary_th_shots, summary_th_hit, summary_th_acc = "0", "0", "0", "0.00%"
     
     faster_banana_val = "-"
+    total_assist_val = "0"
     
     deadliest_weapons = []
     weapon_rows_data = []
@@ -540,6 +541,16 @@ elif page == "PERSONAL STATS":
             j18_l18 = target_ws.get("J18:L18")
             if j18_l18 and len(j18_l18) > 0 and len(j18_l18[0]) > 0:
                 faster_banana_val = format_val(j18_l18[0][0])
+
+            # 2.1 Total Assist (Q18:S18)
+            q18_s18 = target_ws.get("Q18:S18")
+            if q18_s18 and len(q18_s18) > 0:
+                row_qa = q18_s18[0]
+                for cell_val in row_qa:
+                    v_str = str(cell_val).strip()
+                    if v_str and v_str.lower() not in ["nan", "none", ""]:
+                        total_assist_val = format_val(v_str)
+                        break
 
             # 3. Deadliest Weapons (Configurazioni mirate per Nome Arma e Dati)
             dw_configs = [
@@ -632,6 +643,14 @@ elif page == "PERSONAL STATS":
         st.markdown(f"<div class='stat-card'><div class='stat-label'>FASTER BANANA</div><div class='stat-value'>{faster_banana_val}</div></div>", unsafe_allow_html=True)
         st.markdown(f"<div class='stat-card'><div class='stat-label'>ONEHAND ACC%</div><div class='stat-value'>{summary_oh_acc}</div></div>", unsafe_allow_html=True)
         st.markdown(f"<div class='stat-card'><div class='stat-label'>TWOHAND ACC%</div><div class='stat-value'>{summary_th_acc}</div></div>", unsafe_allow_html=True)
+
+    # --- RENDER UI: TOTAL ASSIST (Full-width card inserita prima di Deadliest) ---
+    st.markdown(f"""
+    <div class='stat-card' style='width: 100%; height: 85px; margin-top: 10px;'>
+        <div class='stat-label'>TOTAL ASSIST</div>
+        <div class='stat-value'>{total_assist_val}</div>
+    </div>
+    """, unsafe_allow_html=True)
 
     st.markdown("<br>", unsafe_allow_html=True)
 
