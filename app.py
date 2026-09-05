@@ -448,7 +448,7 @@ elif page == "PERSONAL STATS":
         creds = ottieni_credenziali()
         if creds:
             client = gspread.authorize(creds)
-            sheet = client.open_by_key(SHEET_ID)
+            sheet = client.open_by_key(SHEET_ID_STATS)
             target_ws = next((ws for ws in sheet.worksheets() if str(ws.id).strip() == str(GID_PERSONAL_STATS).strip()), None)
             
             if target_ws:
@@ -508,9 +508,10 @@ elif page == "PERSONAL STATS":
     # Inizializzazione variabili Match Summary (14 campi totali)
     summary_fired, summary_hit, summary_acc, summary_kill, summary_dmg, summary_mvp, summary_death = "0", "0", "0.00%", "0", "0", "0", "0"
     summary_revive, summary_oh_shots, summary_oh_hit, summary_oh_acc = "0", "0", "0", "0.00%"
-    summary_th_shots, summary_th_hit, summary_th_acc = "0", "0", "0.00%"
+    summary_th_shots, summary_th_hit, summary_th_acc = "0", "0", "0", "0.00%"
     
     faster_banana_val = "-"
+    total_assist_val = "0"
     
     deadliest_weapons = []
     weapon_rows_data = []
@@ -541,6 +542,16 @@ elif page == "PERSONAL STATS":
             if j18_l18 and len(j18_l18) > 0 and len(j18_l18[0]) > 0:
                 faster_banana_val = format_val(j18_l18[0][0])
 
+            # 2.1 Total Assist (Q18:S18)
+            q18_s18 = target_ws.get("Q18:S18")
+            if q18_s18 and len(q18_s18) > 0:
+                row_qa = q18_s18[0]
+                for cell_val in row_qa:
+                    v_str = str(cell_val).strip()
+                    if v_str and v_str.lower() not in ["nan", "none", ""]:
+                        total_assist_val = format_val(v_str)
+                        break
+
             # 3. Deadliest Weapons (Configurazioni mirate per Nome Arma e Dati)
             dw_configs = [
                 {"name_range": "H20:I20", "data_range": "H21:S21"},
@@ -564,17 +575,16 @@ elif page == "PERSONAL STATS":
                 r_data = target_ws.get(cfg["data_range"])
                 if r_data and len(r_data) > 0:
                     r_w = r_data[0]
-                    # H=col 0, I=1, J=2, K=3 (DMG), L=4 (ACC%), M=5, N=6 (Onehand), O=7 (Shit Onehand), P=8 (Acc One), Q=9 (Tohand), R=10 (Shit Tohand), S=11 (Acc Two)
                     deadliest_weapons.append({
                         "name": w_name,
-                        "dmg": format_val(r_w[3] if len(r_w) > 3 else 0),          # K
-                        "acc": format_val(r_w[4] if len(r_w) > 4 else 0, is_percentage=True), # L
-                        "onehand": format_val(r_w[6] if len(r_w) > 6 else 0),      # N
-                        "shit_onehand": format_val(r_w[7] if len(r_w) > 7 else 0),# O
-                        "acc_onehand": format_val(r_w[8] if len(r_w) > 8 else 0, is_percentage=True), # P
-                        "twohand": format_val(r_w[9] if len(r_w) > 9 else 0),    # Q
-                        "shit_twohand": format_val(r_w[10] if len(r_w) > 10 else 0),# R
-                        "acc_twohand": format_val(r_w[11] if len(r_w) > 11 else 0, is_percentage=True)  # S
+                        "dmg": format_val(r_w[3] if len(r_w) > 3 else 0),
+                        "acc": format_val(r_w[4] if len(r_w) > 4 else 0, is_percentage=True),
+                        "onehand": format_val(r_w[6] if len(r_w) > 6 else 0),
+                        "shit_onehand": format_val(r_w[7] if len(r_w) > 7 else 0),
+                        "acc_onehand": format_val(r_w[8] if len(r_w) > 8 else 0, is_percentage=True),
+                        "twohand": format_val(r_w[9] if len(r_w) > 9 else 0),
+                        "shit_twohand": format_val(r_w[10] if len(r_w) > 10 else 0),
+                        "acc_twohand": format_val(r_w[11] if len(r_w) > 11 else 0, is_percentage=True)
                     })
                 else:
                     deadliest_weapons.append({
@@ -632,6 +642,14 @@ elif page == "PERSONAL STATS":
         st.markdown(f"<div class='stat-card'><div class='stat-label'>FASTER BANANA</div><div class='stat-value'>{faster_banana_val}</div></div>", unsafe_allow_html=True)
         st.markdown(f"<div class='stat-card'><div class='stat-label'>ONEHAND ACC%</div><div class='stat-value'>{summary_oh_acc}</div></div>", unsafe_allow_html=True)
         st.markdown(f"<div class='stat-card'><div class='stat-label'>TWOHAND ACC%</div><div class='stat-value'>{summary_th_acc}</div></div>", unsafe_allow_html=True)
+
+    # --- RENDER UI: TOTAL ASSIST (Full-width card) ---
+    st.markdown(f"""
+    <div class='stat-card' style='width: 100%; height: 85px; margin-top: 10px;'>
+        <div class='stat-label'>TOTAL ASSIST</div>
+        <div class='stat-value'>{total_assist_val}</div>
+    </div>
+    """, unsafe_allow_html=True)
 
     st.markdown("<br>", unsafe_allow_html=True)
 
