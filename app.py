@@ -575,16 +575,17 @@ elif page == "PERSONAL STATS":
                 r_data = target_ws.get(cfg["data_range"])
                 if r_data and len(r_data) > 0:
                     r_w = r_data[0]
+                    # H=col 0, I=1, J=2, K=3 (DMG), L=4 (ACC%), M=5, N=6 (Onehand), O=7 (Shit Onehand), P=8 (Acc One), Q=9 (Tohand), R=10 (Shit Tohand), S=11 (Acc Two)
                     deadliest_weapons.append({
                         "name": w_name,
-                        "dmg": format_val(r_w[3] if len(r_w) > 3 else 0),
-                        "acc": format_val(r_w[4] if len(r_w) > 4 else 0, is_percentage=True),
-                        "onehand": format_val(r_w[6] if len(r_w) > 6 else 0),
-                        "shit_onehand": format_val(r_w[7] if len(r_w) > 7 else 0),
-                        "acc_onehand": format_val(r_w[8] if len(r_w) > 8 else 0, is_percentage=True),
-                        "twohand": format_val(r_w[9] if len(r_w) > 9 else 0),
-                        "shit_twohand": format_val(r_w[10] if len(r_w) > 10 else 0),
-                        "acc_twohand": format_val(r_w[11] if len(r_w) > 11 else 0, is_percentage=True)
+                        "dmg": format_val(r_w[3] if len(r_w) > 3 else 0),          # K
+                        "acc": format_val(r_w[4] if len(r_w) > 4 else 0, is_percentage=True), # L
+                        "onehand": format_val(r_w[6] if len(r_w) > 6 else 0),      # N
+                        "shit_onehand": format_val(r_w[7] if len(r_w) > 7 else 0),# O
+                        "acc_onehand": format_val(r_w[8] if len(r_w) > 8 else 0, is_percentage=True), # P
+                        "twohand": format_val(r_w[9] if len(r_w) > 9 else 0),    # Q
+                        "shit_twohand": format_val(r_w[10] if len(r_w) > 10 else 0),# R
+                        "acc_twohand": format_val(r_w[11] if len(r_w) > 11 else 0, is_percentage=True)  # S
                     })
                 else:
                     deadliest_weapons.append({
